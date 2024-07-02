@@ -104,7 +104,29 @@ namespace MiniApp.Services
 
 
 
+        public void RemoveMedicine(int id)
+        {
+            int index = -1;
+            for (int i = 0; i < DB.medicines.Length; i++)
+            {
+                if (DB.medicines[i].Id == id)
+                {
+                    index = i;
+                    break;
+                }
+            }
 
+            if (index == -1)
+            {
+                throw new NotFoundException("verilen id ile derman tapilmadi!");
+            }
+
+            for (int i = index; i < DB.medicines.Length - 1; i++)
+            {
+                DB.medicines[i] = DB.medicines[i + 1];
+            }
+            Array.Resize(ref DB.medicines, DB.medicines.Length - 1);
+        }//problem var mence
 
 
 
