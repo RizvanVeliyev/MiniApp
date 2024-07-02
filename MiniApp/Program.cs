@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            string text1 = "salam";
+            string text2 = "salam";
+            Console.WriteLine(text1==text2);
         }
     }
 }
