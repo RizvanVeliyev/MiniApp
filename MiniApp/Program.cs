@@ -17,10 +17,22 @@ namespace MiniApp
             userService.AddUser(firstlUser);
 
             Category category = new Category();
+            category.Name = "Cat1";
 
             Medicine medicine = new Medicine();
+            medicine.Name= "Test";
+            medicine.Price = 13;
+            medicine.CategoryId = 1;
+            medicine.UserId = 1;
+            medicine.CreatedDate = DateTime.Now;
+
 
             Medicine medicine2 = new Medicine();
+            medicine2.Name = "Test1";
+            medicine2.Price = 15;
+            medicine2.CategoryId = 2;
+            medicine2.UserId = 2;
+            medicine2.CreatedDate = DateTime.Now;
 
             User loggedInUser = null;
 
@@ -42,7 +54,7 @@ namespace MiniApp
                     Console.WriteLine(e.Message);
                 }
             }
-
+             
 
 
 
@@ -68,6 +80,11 @@ namespace MiniApp
                 {
                     case "1":
                         categoryService.CreateCategory(category);
+                        for(int i = 0; i < DB.categories.Length; i++)
+                        {
+                            Console.WriteLine(DB.categories[i].Name);
+                        }
+                        
                         break;
                     case "2":
                         medicineService.CreateMedicine(medicine);
