@@ -13,8 +13,8 @@ namespace MiniApp
             CategoryService categoryService = new CategoryService();
             MedicineService medicineService = new MedicineService();
 
-            User firstlUser = new User { Fullname = "Rizvan Veliyev", Email = "veliyev@gmail.com", Password = "salam123" };
-            userService.AddUser(firstlUser);
+            //User firstlUser = new User { Fullname = "Rizvan Veliyev", Email = "veliyev@gmail.com", Password = "salam123" };
+            //userService.AddUser(firstlUser);
 
             Category category = new Category();
             category.Name = "Cat1";
