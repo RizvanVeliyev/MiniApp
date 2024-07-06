@@ -10,7 +10,7 @@ namespace MiniApp.Services
             bool categoryExist = false;
             foreach(var category in DB.categories)
             {
-                if(category.Id== medicine.CategoryId) 
+                if(category.ID== medicine.CategoryId) 
                 {
                     categoryExist = true;
                     break;
@@ -24,6 +24,7 @@ namespace MiniApp.Services
             int newLength = DB.medicines.Length + 1;
             Array.Resize(ref DB.medicines, newLength);
             DB.medicines[newLength-1] = medicine;
+            Console.WriteLine("derman elave olundu!");
 
         }
 
@@ -37,7 +38,7 @@ namespace MiniApp.Services
         {
             foreach (var medicine in DB.medicines)
             {
-                if (medicine.Id == id)
+                if (medicine.ID == id)
                 {
                     return medicine;
                 }
