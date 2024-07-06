@@ -10,8 +10,13 @@
             get => _fullName;
             set
             {
-                if (value.Length < 3 || value.Length > 15) Console.WriteLine("ad uzunlugu 3-15 araliginda olmalidir!");
-                else _fullName = value;
+                while (value.Length < 3 || value.Length > 15)
+                {
+                    Console.WriteLine("ad uzunlugu 3-15 araliginda olmalidir!");
+                    Console.Write("Istifadeci adini yeniden daxil edin:");
+                    value = Console.ReadLine();
+                }
+                if(value.Length>=3 && value.Length<=15) _fullName= value;
             }
                  
         }
@@ -20,20 +25,45 @@
             get => _email;
             set
             {
-                string emailLast = "";
-                for (int i = 0; i < value.Length; i++)
+
+                while (true)
                 {
-                    if (value[i] == '@' && value.Length >= 4)
+                    string emailLast = "";
+                    bool isCorrect = false;
+                    for (int i = 0; i < value.Length; i++)
                     {
-                        for (int j = i; j < value.Length; j++)
+
+                        if (value[i] == '@')
                         {
-                            emailLast += value[i];
+                            isCorrect = true;
+                            for (int j = i; j < value.Length; j++)
+                            {
+                                emailLast += value[j];
+                            }
+                            if (emailLast == "@gmail.com")
+                            {
+                                _email = value;
+                                return;
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("email sonu @gmail.com ile bitmelidir!");
+                                Console.Write("Emaili yeniden daxil edin:");
+                                value = Console.ReadLine();
+                            }
                         }
-                        if(emailLast=="@gmail.com") _email= value;
-                        else Console.WriteLine("email sonu @gmail.com ile bitmelidir!");
+                        
+
                     }
+                    if (!isCorrect)
+                    {
+                        Console.WriteLine("email icerisinde @ simvolundan istofade olunmalidir!");
+                        Console.Write("Emaili yeniden daxil edin:");
+                        value = Console.ReadLine();
+                    }
+
                 }
-                Console.WriteLine("Email duzgun daxil edilmeyib!");
             }
 
         }
@@ -42,25 +72,35 @@
             get => _password;
             set
             {
-                bool isDigit = false;
-                bool isUpper = false;
-                bool isLower = false;
-                if (value.Length >= 8)
+                while (true)
                 {
-                    for (int i = 0; i < value.Length; i++)
+                    bool isDigit = false;
+                    bool isUpper = false;
+                    bool isLower = false;
+                    if (value.Length >= 8)
                     {
-                        if (char.IsDigit(value[i])) isDigit = true;
-                        else if (char.IsUpper(value[i])) isUpper = true;
-                        else if (char.IsLower(value[i])) isLower = true;
-                        if (isDigit && isLower && isUpper)
+                        for (int i = 0; i < value.Length; i++)
                         {
-                            _password = value;
-                            break;
+                            if (char.IsDigit(value[i])) isDigit = true;
+                            else if (char.IsUpper(value[i])) isUpper = true;
+                            else if (char.IsLower(value[i])) isLower = true;
+                            if (isDigit && isLower && isUpper)
+                            {
+                                _password = value;
+                                return;
+                            }
                         }
+                        Console.WriteLine("sifre en az 1 reqemden 1 kicik ve 1 boyuk herfden ibaret olmalidir! Yeniden daxil edin:");
+                        value = Console.ReadLine();
                     }
-                    Console.WriteLine("sifre en az 1 reqemden 1 kicik ve 1 boyuk herfden ibaret olmalidir!");
+                    else 
+                    {
+                        Console.WriteLine("sifre en az 8 simvoldan ibaret olmalidir! Yeniden daxil edin:");
+                        value=Console.ReadLine();
+                    }
+
                 }
-                else Console.WriteLine("sifre en az 8 simvoldan ibaret olmalidir!");
+                
             }
 
         }
