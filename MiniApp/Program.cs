@@ -14,16 +14,20 @@ namespace MiniApp
             CategoryService categoryService = new CategoryService();
             MedicineService medicineService = new MedicineService();
 
-            
+            Console.WriteLine("============================================================");
             Console.WriteLine("Programa xos geldiniz!");
             menu1:
             Console.WriteLine("1. register ");
             Console.WriteLine("2. Login ");
             Console.WriteLine("3. show menu ");
             Console.WriteLine("4. exit the program ");
+            Console.WriteLine("============================================================");
 
             while (true)
             {
+                Console.WriteLine();
+                Console.Write("Choose an option: ");
+
                 int opt = int.Parse(Console.ReadLine());
                 switch (opt)
                 {
@@ -35,7 +39,9 @@ namespace MiniApp
                         user.Email = Console.ReadLine();
                         Console.Write("Istifadeci parolunu daxil edin:");
                         user.Password = Console.ReadLine();
-                        userService.AddUser(user); break;
+                        userService.AddUser(user);
+                        Console.WriteLine();
+                        break;
                     case 2:
                         User loggedInUser = null;
 
@@ -44,11 +50,13 @@ namespace MiniApp
 
                         Console.Write("Enter Password: ");
                         string password = Console.ReadLine();
-
+                        Console.WriteLine();
                         try
                         {
                             loggedInUser = userService.Login(email, password);
                             Console.WriteLine("Login successful!\n");
+                            Console.WriteLine();
+
                             goto menu2;
                         }
                         catch (NotFoundException e)
@@ -70,6 +78,8 @@ namespace MiniApp
                 
             }
             menu2:
+            Console.WriteLine("============================================================");
+
             Console.WriteLine("Menu:");
             Console.WriteLine("1. Create Category");
             Console.WriteLine("2. Create Medicine");
@@ -81,12 +91,13 @@ namespace MiniApp
             Console.WriteLine("8. Update Medicine");
             Console.WriteLine("9. Show Menu");
             Console.WriteLine("10. Exit from user");
+            Console.WriteLine("============================================================");
 
             bool exit = false;
 
             while (!exit)
             {
-               
+                Console.WriteLine();
                 Console.Write("Choose an option: ");
                 string option = Console.ReadLine();
 
@@ -97,12 +108,7 @@ namespace MiniApp
                         Console.Write("Kateqoriya adini daxil edin:");
                         category.Name = Console.ReadLine();
                         categoryService.CreateCategory(category);
-                        for(int i = 0; i < DB.categories.Length; i++)   
-                        {
-                            Console.WriteLine(DB.categories[i].Name);
-                            Console.WriteLine(DB.categories[i].Id);
-
-                        }
+                        
 
                         break;
                     case "2":
@@ -120,27 +126,33 @@ namespace MiniApp
                     case "3":
                         foreach(var item in medicineService.GetAllmedicines())
                         {
-                            Console.WriteLine(item.Name);
-                            Console.WriteLine(item.ID);
+                            Console.WriteLine($"Ad:{item.Name} Qiymet:{item.Price} Kateqoriya:{item.CategoryId} Yaranma tarixi:{item.CreatedDate}");
                         }
                         
                         break;
                     case "4":
                         Console.Write("Gormek istediyiniz dermanin id-sini daxil edin:");
                         int id = int.Parse(Console.ReadLine());
-                        Console.WriteLine(medicineService.GetMedicineById(id).Name);
+                        var med = medicineService.GetMedicineById(id);
+                        Console.WriteLine($"Ad:{med.Name} Qiymet:{med.Price} Kateqoriya:{med.CategoryId} Yaranma tarixi:{med.CreatedDate}");
                         break;
                     case "5":
                         Console.Write("Gormek istediyiniz dermanin adini-sini daxil edin:");
                         string name = Console.ReadLine();
-                        Console.WriteLine(medicineService.GetMedicineByName(name).Name); 
+                        var medName = medicineService.GetMedicineByName(name);
+                        Console.WriteLine($"Ad:{medName.Name} Qiymet:{medName.Price} Kateqoriya:{medName.CategoryId} Yaranma tarixi:{medName.CreatedDate}");
+
                         break;
                     case "6":
-                        Console.Write("Gormek istediyiniz dermanin kateqoriya id-sini daxil edin:");
+                        for (int i = 0; i < DB.categories.Length; i++)
+                        {
+                            Console.WriteLine($"{DB.categories[i].ID}-{DB.categories[i].Name}");
+                        }
+                        Console.Write("Hansi kateqoriyada olan dermanlari gormek isteyirsiniz?");
                         int catId = int.Parse(Console.ReadLine());
                         foreach(var item in medicineService.GetMedicineByCategory(catId))
                         {
-                            Console.WriteLine(item.Name);
+                            Console.WriteLine($"Ad:{item.Name} Qiymet:{item.Price} Kateqoriya:{item.CategoryId} Yaranma tarixi:{item.CreatedDate}");
                         }
                         break;
                     case "7":
@@ -163,7 +175,6 @@ namespace MiniApp
                         break;
                     case "9":
                         goto menu2;
-                        break;
                     case "10":
                         exit = true;
                         break;

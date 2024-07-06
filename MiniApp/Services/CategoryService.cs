@@ -9,6 +9,7 @@ namespace MiniApp.Services
             int newLength = DB.categories.Length + 1;
             Array.Resize(ref DB.categories, newLength);
             DB.categories[newLength - 1] = category;
+            Console.WriteLine("kateqoriya elave olundu!");
         }
     }
 }
