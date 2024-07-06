@@ -137,10 +137,12 @@ namespace MiniApp
                     case "4":
                         Console.Write("Gormek istediyiniz dermanin id-sini daxil edin:");
                         int id = int.Parse(Console.ReadLine());
-                        Console.WriteLine(medicineService.GetMedicineById(id));
+                        Console.WriteLine(medicineService.GetMedicineById(id).Name);
                         break;
                     case "5":
-                        medicineService.GetMedicineByName(medicine2.Name);
+                        Console.Write("Gormek istediyiniz dermanin adini-sini daxil edin:");
+                        string name = Console.ReadLine();
+                        Console.WriteLine(medicineService.GetMedicineByName(name).Name); 
                         break;
                     case "6":
                         medicineService.GetMedicineByCategory(medicine2.CategoryId);
