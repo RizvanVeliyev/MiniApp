@@ -133,32 +133,65 @@ namespace MiniApp
                     case "4":
                         Console.Write("Gormek istediyiniz dermanin id-sini daxil edin:");
                         int id = int.Parse(Console.ReadLine());
-                        var med = medicineService.GetMedicineById(id);
-                        Console.WriteLine($"Ad:{med.Name} Qiymet:{med.Price} Kateqoriya:{med.CategoryId} Yaranma tarixi:{med.CreatedDate}");
+                        try
+                        {
+                            var med = medicineService.GetMedicineById(id);
+                            Console.WriteLine($"Ad:{med.Name} Qiymet:{med.Price} Kateqoriya:{med.CategoryId} Yaranma tarixi:{med.CreatedDate}");
+
+                        }
+                        catch (NotFoundException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        
                         break;
                     case "5":
                         Console.Write("Gormek istediyiniz dermanin adini-sini daxil edin:");
                         string name = Console.ReadLine();
-                        var medName = medicineService.GetMedicineByName(name);
-                        Console.WriteLine($"Ad:{medName.Name} Qiymet:{medName.Price} Kateqoriya:{medName.CategoryId} Yaranma tarixi:{medName.CreatedDate}");
+                        try
+                        {
+                            var medName = medicineService.GetMedicineByName(name);
+                            Console.WriteLine($"Ad:{medName.Name} Qiymet:{medName.Price} Kateqoriya:{medName.CategoryId} Yaranma tarixi:{medName.CreatedDate}");
 
+                        }
+                        catch (NotFoundException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        
                         break;
                     case "6":
+                        Console.WriteLine("Kateqoriya adlari:");
                         for (int i = 0; i < DB.categories.Length; i++)
                         {
                             Console.WriteLine($"{DB.categories[i].ID}-{DB.categories[i].Name}");
                         }
                         Console.Write("Hansi kateqoriyada olan dermanlari gormek isteyirsiniz?");
                         int catId = int.Parse(Console.ReadLine());
-                        foreach(var item in medicineService.GetMedicineByCategory(catId))
+                        try
                         {
-                            Console.WriteLine($"Ad:{item.Name} Qiymet:{item.Price} Kateqoriya:{item.CategoryId} Yaranma tarixi:{item.CreatedDate}");
+                            foreach (var item in medicineService.GetMedicineByCategory(catId))
+                            {
+                                Console.WriteLine($"Ad:{item.Name} Qiymet:{item.Price} Kateqoriya:{item.CategoryId} Yaranma tarixi:{item.CreatedDate}");
+                            }
                         }
+                        catch (NotFoundException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        
                         break;
                     case "7":
                         Console.Write("Silmek istediyiniz dermanin id-sini daxil edin:");
                         int removeId=int.Parse(Console.ReadLine());
-                        medicineService.RemoveMedicine(removeId);
+                        try
+                        {
+                            medicineService.RemoveMedicine(removeId);
+                        }
+                        catch (NotFoundException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break; 
                     case "8":
                         Console.Write("deyismek istediyiniz dermanin id-sini daxil edin:");
@@ -171,7 +204,14 @@ namespace MiniApp
                         Console.Write("Yeni derman kateqoriyasini daxil edin:");
                         medicine2.CategoryId = int.Parse(Console.ReadLine());
                         medicine2.CreatedDate = DateTime.Now;
-                        medicineService.UpdateMedicine(medId, medicine2);
+                        try
+                        {
+                            medicineService.UpdateMedicine(medId, medicine2);
+                        }
+                        catch (NotFoundException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     case "9":
                         goto menu2;
@@ -179,7 +219,7 @@ namespace MiniApp
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Invalid option. Please try again.");
+                        Console.WriteLine("Duzgun secim edin!");
                         break;
                 }
             }
