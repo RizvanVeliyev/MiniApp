@@ -20,7 +20,7 @@ namespace MiniApp
             Console.WriteLine("1. register ");
             Console.WriteLine("2. Login ");
             Console.WriteLine("3. show menu ");
-            Console.WriteLine("4. exit ");
+            Console.WriteLine("4. exit the program ");
 
             while (true)
             {
@@ -80,17 +80,7 @@ namespace MiniApp
             Console.WriteLine("7. Remove Medicine");
             Console.WriteLine("8. Update Medicine");
             Console.WriteLine("9. Show Menu");
-            Console.WriteLine("10. Exit");
-
-
-
-
-
-            Medicine medicine2 = new Medicine();
-            
-             
-
-
+            Console.WriteLine("10. Exit from user");
 
             bool exit = false;
 
@@ -131,6 +121,7 @@ namespace MiniApp
                         foreach(var item in medicineService.GetAllmedicines())
                         {
                             Console.WriteLine(item.Name);
+                            Console.WriteLine(item.ID);
                         }
                         
                         break;
@@ -145,13 +136,30 @@ namespace MiniApp
                         Console.WriteLine(medicineService.GetMedicineByName(name).Name); 
                         break;
                     case "6":
-                        medicineService.GetMedicineByCategory(medicine2.CategoryId);
+                        Console.Write("Gormek istediyiniz dermanin kateqoriya id-sini daxil edin:");
+                        int catId = int.Parse(Console.ReadLine());
+                        foreach(var item in medicineService.GetMedicineByCategory(catId))
+                        {
+                            Console.WriteLine(item.Name);
+                        }
                         break;
                     case "7":
-                        medicineService.RemoveMedicine(medicine2.Id);
+                        Console.Write("Silmek istediyiniz dermanin id-sini daxil edin:");
+                        int removeId=int.Parse(Console.ReadLine());
+                        medicineService.RemoveMedicine(removeId);
                         break; 
                     case "8":
-                        medicineService.UpdateMedicine(medicine2.Id, medicine2);
+                        Console.Write("deyismek istediyiniz dermanin id-sini daxil edin:");
+                        int medId=int.Parse(Console.ReadLine());
+                        Medicine medicine2= new Medicine();
+                        Console.Write("Yeni derman adini daxil edin:");
+                        medicine2.Name=Console.ReadLine();
+                        Console.Write("Yeni derman qiymetini daxil edin:");
+                        medicine2.Price = int.Parse(Console.ReadLine());
+                        Console.Write("Yeni derman kateqoriyasini daxil edin:");
+                        medicine2.CategoryId = int.Parse(Console.ReadLine());
+                        medicine2.CreatedDate = DateTime.Now;
+                        medicineService.UpdateMedicine(medId, medicine2);
                         break;
                     case "9":
                         goto menu2;

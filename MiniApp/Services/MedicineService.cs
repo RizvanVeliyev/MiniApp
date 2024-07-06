@@ -94,7 +94,7 @@ namespace MiniApp.Services
         {
             for (int i = 0; i < DB.medicines.Length; i++)
             {
-                if (DB.medicines[i].Id == id)
+                if (DB.medicines[i].ID == id)
                 {
                     DB.medicines[i] = updatedMedicine;
                     return;
@@ -107,27 +107,25 @@ namespace MiniApp.Services
 
         public void RemoveMedicine(int id)
         {
-            int index = -1;
             for (int i = 0; i < DB.medicines.Length; i++)
             {
-                if (DB.medicines[i].Id == id)
+                if (id == DB.medicines[i].ID)
                 {
-                    index = i;
-                    break;
+                    for (int j = id; j < DB.medicines.Length-1; j++)
+                    {
+                        DB.medicines[j] = DB.medicines[j+1];
+
+                    }
+                    Array.Resize(ref DB.medicines,DB.medicines.Length-1);
+                    Console.WriteLine($"{id} id-li derman silindi!");
+                    return;
                 }
+                
             }
+            throw new NotFoundException("bu id ile derman tapilmadi");
 
-            if (index == -1)
-            {
-                throw new NotFoundException("verilen id ile derman tapilmadi!");
-            }
+        }
 
-            for (int i = index; i < DB.medicines.Length - 1; i++)
-            {
-                DB.medicines[i] = DB.medicines[i + 1];
-            }
-            Array.Resize(ref DB.medicines, DB.medicines.Length - 1);
-        }//problem var mence
 
 
 
