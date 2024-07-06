@@ -17,16 +17,16 @@ namespace MiniApp
             Console.WriteLine("============================================================");
             Console.WriteLine("Programa xos geldiniz!");
             menu1:
-            Console.WriteLine("1. register ");
-            Console.WriteLine("2. Login ");
-            Console.WriteLine("3. show menu ");
-            Console.WriteLine("4. exit the program ");
+            Console.WriteLine("1. Qeydiyyatdan kec ");
+            Console.WriteLine("2. Hesaba giris ");
+            Console.WriteLine("3. Menyunu goster ");
+            Console.WriteLine("4. Programi sonlandirmag ");
             Console.WriteLine("============================================================");
 
             while (true)
             {
                 Console.WriteLine();
-                Console.Write("Choose an option: ");
+                Console.Write("Secim edin: ");
 
                 int opt = int.Parse(Console.ReadLine());
                 switch (opt)
@@ -45,16 +45,16 @@ namespace MiniApp
                     case 2:
                         User loggedInUser = null;
 
-                        Console.Write("Enter Email: ");
+                        Console.Write("Emaili daxil edin: ");
                         string email = Console.ReadLine();
 
-                        Console.Write("Enter Password: ");
+                        Console.Write("Sifreni daxil edin: ");
                         string password = Console.ReadLine();
                         Console.WriteLine();
                         try
                         {
                             loggedInUser = userService.Login(email, password);
-                            Console.WriteLine("Login successful!\n");
+                            Console.WriteLine("Hesaba ugurla giris edildi!\n");
                             Console.WriteLine();
 
                             goto menu2;
@@ -81,16 +81,16 @@ namespace MiniApp
             menu2:
             Console.WriteLine("============================================================");
             Console.WriteLine("Menu:");
-            Console.WriteLine("1. Create Category");
-            Console.WriteLine("2. Create Medicine");
-            Console.WriteLine("3. List All Medicines");
-            Console.WriteLine("4. Get Medicine By Id");
-            Console.WriteLine("5. Get Medicine By Name");
-            Console.WriteLine("6. Get Medicine By Category");
-            Console.WriteLine("7. Remove Medicine");
-            Console.WriteLine("8. Update Medicine");
-            Console.WriteLine("9. Show Menu");
-            Console.WriteLine("10. Exit from user");
+            Console.WriteLine("1. Kateqoriya yarat");
+            Console.WriteLine("2. Derman yarat");
+            Console.WriteLine("3. Butun dermanlari goster");
+            Console.WriteLine("4. Id ile derman tap");
+            Console.WriteLine("5. Ad ile derman tap");
+            Console.WriteLine("6. Kateqoriya ile derman tap");
+            Console.WriteLine("7. Dermani sil");
+            Console.WriteLine("8. Dermani yenile");
+            Console.WriteLine("9. Menyunu goster");
+            Console.WriteLine("10. Hesabdan cixis");
             Console.WriteLine("============================================================");
 
             bool exit = false;
@@ -98,7 +98,7 @@ namespace MiniApp
             while (!exit)
             {
                 Console.WriteLine();
-                Console.Write("Choose an option: ");
+                Console.Write("Secim edin: ");
                 string option = Console.ReadLine();
 
                 switch (option)
