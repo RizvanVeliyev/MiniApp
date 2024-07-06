@@ -77,9 +77,9 @@ namespace MiniApp
                 
                 
             }
+
             menu2:
             Console.WriteLine("============================================================");
-
             Console.WriteLine("Menu:");
             Console.WriteLine("1. Create Category");
             Console.WriteLine("2. Create Medicine");
@@ -120,15 +120,13 @@ namespace MiniApp
                         Console.Write("Derman kateqoriyasini daxil edin:");
                         medicine.CategoryId = int.Parse(Console.ReadLine());
                         medicine.CreatedDate= DateTime.Now;
-                        
                         medicineService.CreateMedicine(medicine);
                         break;
                     case "3":
                         foreach(var item in medicineService.GetAllmedicines())
                         {
                             Console.WriteLine($"Ad:{item.Name} Qiymet:{item.Price} Kateqoriya:{item.CategoryId} Yaranma tarixi:{item.CreatedDate}");
-                        }
-                        
+                        }                       
                         break;
                     case "4":
                         Console.Write("Gormek istediyiniz dermanin id-sini daxil edin:");
@@ -142,8 +140,7 @@ namespace MiniApp
                         catch (NotFoundException e)
                         {
                             Console.WriteLine(e.Message);
-                        }
-                        
+                        }                      
                         break;
                     case "5":
                         Console.Write("Gormek istediyiniz dermanin adini-sini daxil edin:");
@@ -157,8 +154,7 @@ namespace MiniApp
                         catch (NotFoundException e)
                         {
                             Console.WriteLine(e.Message);
-                        }
-                        
+                        }                        
                         break;
                     case "6":
                         Console.WriteLine("Kateqoriya adlari:");
@@ -178,8 +174,7 @@ namespace MiniApp
                         catch (NotFoundException e)
                         {
                             Console.WriteLine(e.Message);
-                        }
-                        
+                        }                       
                         break;
                     case "7":
                         Console.Write("Silmek istediyiniz dermanin id-sini daxil edin:");
